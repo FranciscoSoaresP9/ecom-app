@@ -1,4 +1,4 @@
-package com.app.ecom_application;
+package com.app.ecom_microservices;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
