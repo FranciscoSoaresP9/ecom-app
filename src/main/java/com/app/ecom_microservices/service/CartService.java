@@ -60,11 +60,15 @@ public class CartService {
         return repository.deleteByUserAndProduct(user, product);
     }
 
-    public List<CartItemResponse> getCart(String userId) {
-        var user = userService.fetchUser(Long.parseLong(userId));
-        return repository.findByUser(user).stream()
+    public List<CartItemResponse> getCartResponse(String userId) {
+        return getCart(userId).stream()
                 .map(this::mapCartItemToResponse)
                 .collect(Collectors.toList());
+    }
+
+    public List<CartItem> getCart(String userId) {
+        var user = userService.fetchUser(Long.parseLong(userId));
+        return repository.findByUser(user);
     }
 
     private Optional<CartItem> getOptionCartItem(User user, Product product) {
@@ -89,4 +93,7 @@ public class CartService {
                 .withPrice(cartItem.getProduct().getPrice());
     }
 
+    public void clearCart(Long userId) {
+        repository.deleteByUserId(userId);
+    }
 }
