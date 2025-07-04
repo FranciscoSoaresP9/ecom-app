@@ -1,0 +1,63 @@
+### Java ###
+*.class
+*.jar
+*.war
+*.ear
+*.log
+
+# Gerados por compiladores
+*.class
+*.dll
+*.exe
+*.so
+
+# IDEs
+.idea/
+*.iml
+*.ipr
+*.iws
+.vscode/
+*.sw?
+
+# Maven
+target/
+!.mvn/wrapper/maven-wrapper.jar
+
+# Gradle (caso uses)
+.gradle/
+build/
+
+# Arquivos de sistema
+.DS_Store
+Thumbs.db
+
+# Logs
+logs/
+*.log
+
+# Test reports
+test-output/
+surefire-reports/
+jacoco.exec
+
+# Configs locais
+.env
+*.local
+application-*.yml
+application-*.properties
+
+# Docker
+docker-compose.override.yml
+*.pid
+
+# IntelliJ run configs
+out/
+*.tmp
+*.bak
+*.orig
+*.rej
+
+# Arquivos temporários e de cache
+tmp/
+.cache/
+spring.log
