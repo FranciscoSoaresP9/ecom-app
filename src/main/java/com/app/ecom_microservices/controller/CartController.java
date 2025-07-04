@@ -1,11 +1,15 @@
 package com.app.ecom_microservices.controller;
 
 import com.app.ecom_microservices.dto.CartItemRequest;
+import com.app.ecom_microservices.dto.CartItemResponse;
+import com.app.ecom_microservices.model.CartItem;
 import com.app.ecom_microservices.service.CartService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RequestMapping("/api/cart")
 @RestController
@@ -32,5 +36,8 @@ public class CartController {
                 ResponseEntity.notFound().build();
     }
 
-
+    @GetMapping
+    public ResponseEntity<List<CartItemResponse>> getCart(@RequestHeader("X-User-ID") String userId) {
+        return ResponseEntity.ok(service.getCart(userId));
+    }
 }
