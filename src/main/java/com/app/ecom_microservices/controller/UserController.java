@@ -2,7 +2,6 @@ package com.app.ecom_microservices.controller;
 
 import com.app.ecom_microservices.dto.UserRequest;
 import com.app.ecom_microservices.dto.UserResponse;
-import com.app.ecom_microservices.module.User;
 import com.app.ecom_microservices.service.UserService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -25,7 +24,7 @@ public class UserController {
 
     @GetMapping("/{id}")
     public ResponseEntity<UserResponse> getUsers(@PathVariable Long id) {
-        return userService.fetchUser(id)
+        return userService.fetchOptionalUserResponse(id)
                 .map(ResponseEntity::ok)
                 .orElseGet(() -> ResponseEntity.notFound().build());
     }

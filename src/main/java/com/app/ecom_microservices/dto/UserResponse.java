@@ -1,7 +1,7 @@
 package com.app.ecom_microservices.dto;
 
 
-import com.app.ecom_microservices.module.UserRole;
+import com.app.ecom_microservices.model.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;

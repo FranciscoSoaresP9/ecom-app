@@ -1,6 +1,5 @@
 package com.app.ecom_microservices.dto;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -10,10 +9,7 @@ import lombok.With;
 @With
 @AllArgsConstructor
 @NoArgsConstructor
-public class UserRequest {
-    private String firstName;
-    private String lastName;
-    private String email;
-    private String phone;
-    private AddressDTO address;
+public class CartItemRequest {
+    private Long productId;
+    private Integer quantity;
 }

@@ -3,9 +3,9 @@ spring:
     name: ecom-application
 
   datasource:
-    url: jdbc:postgresql://localhost:5432/eco-microservices
+    url: jdbc:postgresql://localhost:5432/microservices
     username: postgres
-    password: postgres
+    password: SAniCA2803
     driver-class-name: org.postgresql.Driver
 
   jpa:

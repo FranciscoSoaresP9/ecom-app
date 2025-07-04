@@ -1,4 +1,4 @@
-package com.app.ecom_microservices.module;
+package com.app.ecom_microservices.model;
 
 
 import jakarta.persistence.*;

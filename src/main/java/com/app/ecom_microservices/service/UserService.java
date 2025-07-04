@@ -3,8 +3,8 @@ package com.app.ecom_microservices.service;
 import com.app.ecom_microservices.dto.AddressDTO;
 import com.app.ecom_microservices.dto.UserRequest;
 import com.app.ecom_microservices.dto.UserResponse;
-import com.app.ecom_microservices.module.Address;
-import com.app.ecom_microservices.module.User;
+import com.app.ecom_microservices.model.Address;
+import com.app.ecom_microservices.model.User;
 import com.app.ecom_microservices.repository.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -29,7 +29,12 @@ public class UserService {
         return repository.findById(id);
     }
 
-    public Optional<UserResponse> fetchUser(Long id) {
+    public User fetchUser(Long id) {
+        return fetchOptionalUser(id)
+                .orElseThrow(() -> new RuntimeException("User not found"));
+    }
+
+    public Optional<UserResponse> fetchOptionalUserResponse(Long id) {
         return fetchOptionalUser(id).map(this::mapToUserResponse);
     }
 
