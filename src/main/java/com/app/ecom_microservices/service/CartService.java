@@ -2,14 +2,19 @@ package com.app.ecom_microservices.service;
 
 import com.app.ecom_microservices.dto.CartItemRequest;
 import com.app.ecom_microservices.model.CartItem;
+import com.app.ecom_microservices.model.Product;
+import com.app.ecom_microservices.model.User;
 import com.app.ecom_microservices.repository.CartItemRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
+@Transactional
 public class CartService {
 
     private final CartItemRepository repository;
@@ -20,7 +25,7 @@ public class CartService {
         var user = userService.fetchUser(Long.parseLong(userId));
         var product = productService.findProductById(request.getProductId());
         var price = product.getPrice().multiply(BigDecimal.valueOf(request.getQuantity()));
-        var existingCartItem = repository.findByUserAndProduct(user, product);
+        var existingCartItem = getOptionCartItem(user, product);
 
         var cartItem = existingCartItem
                 .map(c -> {
@@ -42,5 +47,26 @@ public class CartService {
         repository.save(cartItem);
 
         return true;
+    }
+
+    public boolean deleteItemFromCart(String userId, Long productId) {
+        var user = userService.fetchUser(Long.parseLong(userId));
+        var product = productService.findProductById(productId);
+        return repository.deleteByUserAndProduct(user, product);
+    }
+
+    private Optional<CartItem> getOptionCartItem(User user, Product product) {
+        return repository.findByUserAndProduct(user, product);
+    }
+
+    private CartItem getCartItem(String userId, Long productId) {
+        var user = userService.fetchUser(Long.parseLong(userId));
+        var product = productService.findProductById(productId);
+        return getCartItem(user, product);
+    }
+
+    private CartItem getCartItem(User user, Product product) {
+        return getOptionCartItem(user, product)
+                .orElseThrow(() -> new RuntimeException("Product not found in cart"));
     }
 }
